@@ -5,6 +5,11 @@ In particular, it will check and/or wait for files or ports.
 
 appdeps is primarily intended for [Docker](https://www.docker.com/) containers.
 
+## Installation
+```
+pip install appdeps
+```
+
 ## Usage
 ```
 usage: appdeps.py [-h] [--wait-secs WAIT_SECS] [--interval-secs INTERVAL_SECS]
