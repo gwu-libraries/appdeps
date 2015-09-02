@@ -68,13 +68,12 @@ if __name__ == '__main__':
         iter_dict[wait_file(f)] = "%s does not exist after wait." % f
 
     for p in args.port:
-        (host, port) = p.split(":")
-        iter_dict[check_port(host, port)] = "%s not available." % p
+        (main_host, main_port) = p.split(":")
+        iter_dict[check_port(main_host, main_port)] = "%s not available." % p
 
     for p in args.port_wait:
-        (host, port) = p.split(":")
-        iter_dict[wait_port(host, port)] = "%s not available after wait." % p
-
+        (main_host, main_port) = p.split(":")
+        iter_dict[wait_port(main_host, main_port)] = "%s not available after wait." % p
 
     iters = iter_dict.keys()
     start = datetime.now()
