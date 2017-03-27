@@ -6,6 +6,8 @@ import socket
 from datetime import datetime, timedelta
 import time
 
+from __future__ import print_function
+
 
 def _check_port(host, port):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -13,7 +15,7 @@ def _check_port(host, port):
         s.connect((host, int(port)))
     except socket.error:
         return False
-    print "%s:%s is available." % (host, port)
+    print("%s:%s is available." % (host, port))
     return True
 
 
@@ -29,7 +31,7 @@ def wait_port(host, port):
 
 def _check_file(filepath):
     if os.path.exists(filepath):
-        print "%s exists." % filepath
+        print("%s exists." % filepath)
         return True
     else:
         return False
@@ -83,7 +85,7 @@ if __name__ == '__main__':
     count = 0
     while iters and datetime.now() < end:
         count += 1
-        print "Check %s" % count
+        print("Check %s" % count)
         remove_iters = []
         for check_iter in iters:
             try:
@@ -99,7 +101,7 @@ if __name__ == '__main__':
             time.sleep(args.interval_secs)
 
     for result in iter_dict.values():
-        print result
+        print(result)
 
     if iter_dict:
         exit(1)
