@@ -79,7 +79,7 @@ if __name__ == '__main__':
         (main_host, main_port) = p.split(":")
         iter_dict[wait_port(main_host, main_port)] = "%s not available after wait." % p
 
-    iters = iter_dict.keys()
+    iters = list(iter_dict.keys())
     start = datetime.now()
     end = start + timedelta(seconds=args.wait_secs)
     count = 0
