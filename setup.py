@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='appdeps',
-    version='1.0.0',
+    version='1.1.0',
     url='https://github.com/gwu-libraries/appdeps',
     author='Justin Littman',
     author_email='justinlittman@gmail.com',
@@ -14,7 +14,8 @@ setup(
         'Intended Audience :: System Administrators',
         'Topic :: System :: Systems Administration',
         'Topic :: Utilities',
-        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 3',
         'Development Status :: 5 - Production/Stable',
     ],
 )

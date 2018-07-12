@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 
 import argparse
 import os
@@ -13,7 +14,7 @@ def _check_port(host, port):
         s.connect((host, int(port)))
     except socket.error:
         return False
-    print "%s:%s is available." % (host, port)
+    print("{}:{} is available.".format(host, port))
     return True
 
 
@@ -29,7 +30,7 @@ def wait_port(host, port):
 
 def _check_file(filepath):
     if os.path.exists(filepath):
-        print "%s exists." % filepath
+        print("{} exists.".format(filepath))
         return True
     else:
         return False
@@ -64,42 +65,42 @@ if __name__ == '__main__':
 
     iter_dict = {}
     for f in args.file:
-        iter_dict[check_file(f)] = "%s does not exist." % f
+        iter_dict[check_file(f)] = "{} does not exist.".format(f)
 
     for f in args.file_wait:
-        iter_dict[wait_file(f)] = "%s does not exist after wait." % f
+        iter_dict[wait_file(f)] = "{} does not exist after wait.".format(f)
 
     for p in args.port:
         (main_host, main_port) = p.split(":")
-        iter_dict[check_port(main_host, main_port)] = "%s not available." % p
+        iter_dict[check_port(main_host, main_port)] = "{} not available.".format(p)
 
     for p in args.port_wait:
         (main_host, main_port) = p.split(":")
-        iter_dict[wait_port(main_host, main_port)] = "%s not available after wait." % p
+        iter_dict[wait_port(main_host, main_port)] = "{} not available after wait.".format(p)
 
-    iters = iter_dict.keys()
+    iters = list(iter_dict.keys())
     start = datetime.now()
     end = start + timedelta(seconds=args.wait_secs)
     count = 0
     while iters and datetime.now() < end:
         count += 1
-        print "Check %s" % count
+        print("Check {}".format(count))
         remove_iters = []
         for check_iter in iters:
             try:
                 if next(check_iter):
-                    #Remove from iter_dict
+                    # Remove from iter_dict
                     del iter_dict[check_iter]
             except StopIteration:
                 remove_iters.append(check_iter)
         for remove_iter in remove_iters:
             iters.remove(remove_iter)
         if iters and count > 1:
-            #Wait
+            # Wait
             time.sleep(args.interval_secs)
 
     for result in iter_dict.values():
-        print result
+        print(result)
 
     if iter_dict:
         exit(1)
